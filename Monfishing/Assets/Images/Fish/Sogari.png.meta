@@ -116,12 +116,12 @@ TextureImporter:
       name: Sogari_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 33
-        width: 89
-        height: 34
+        x: 0
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 92f8ed6d5efa2c846b93db067678dd70
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sogari_0: -4134669350009255777
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

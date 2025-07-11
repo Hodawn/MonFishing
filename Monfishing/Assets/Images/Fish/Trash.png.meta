@@ -116,12 +116,12 @@ TextureImporter:
       name: Trash_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 14
-        width: 79
-        height: 77
+        x: 0
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4afa08ef54a726f49b11055ef29c2f2e
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Trash_0: 2433294883196242628
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

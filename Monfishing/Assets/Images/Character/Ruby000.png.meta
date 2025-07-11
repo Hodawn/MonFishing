@@ -116,10 +116,10 @@ TextureImporter:
       name: Ruby000_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 25
-        width: 228
-        height: 334
+        x: 0
+        y: 0
+        width: 270
+        height: 400
       alignment: 9
       pivot: {x: 0.52341795, y: 0.47679076}
       border: {x: 0, y: 2, z: 0, w: 0}

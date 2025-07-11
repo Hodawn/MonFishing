@@ -116,12 +116,12 @@ TextureImporter:
       name: Dogimon_0
       rect:
         serializedVersion: 2
-        x: 31
-        y: 24
-        width: 38
-        height: 59
+        x: 0
+        y: 0
+        width: 100
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: eff1e6656bb54594a9c2f1bd33e2d4c0
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Dogimon_0: 5917122863256050636
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

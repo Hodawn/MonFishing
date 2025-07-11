@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0fd1960a0efc4f9408573c9973ff2da2
+guid: 53a50220d0b835e4f91305f9aa3ae48b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2852917305931960099
-    second: Ruby002_0
+      213: 3243871851857501483
+    second: Fail_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ruby002_0
+      name: Fail_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 270
-        height: 400
-      alignment: 9
-      pivot: {x: 0.49999994, y: 0.4864612}
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 32f83a1ac29979720800000000000000
-      internalID: 2852917305931960099
+      spriteID: b2ddad2334c840d20800000000000000
+      internalID: 3243871851857501483
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2d42f781dbd6a4e46b7c13d31963cbdf
+    spriteID: 17d9c39967d06474f81e67ce623c0a26
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Ruby002_0: 2852917305931960099
+      Fail_0: 3243871851857501483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

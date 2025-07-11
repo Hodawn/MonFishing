@@ -20,6 +20,9 @@ public class FishingManager : MonoBehaviour
     private bool canReact = false;
     private float gauge = 0f;
     private bool isFishing = false;
+    [Header("Failure")]
+    public Sprite failSprite;              // 실패한 캐릭터 얼굴
+    public GameObject failImage;           // "낚시 실패!" 이미지 오브젝트
 
     [Header("Fish Probabilities")]
     [Range(0f, 1f)] public float sRate = 0.05f; // 5%
@@ -39,21 +42,26 @@ public class FishingManager : MonoBehaviour
         Debug.Log("시작함");
     }
 
-    void OnFishButtonClick()
+    public void OnFishButtonClick()
     {
-        if (isFishing == false)
+        if (!isFishing)
         {
             StartCoroutine(StartFishing());
         }
         else if (canReact)
         {
             canReact = false;
-            StopAllCoroutines(); // 느낌표 대기 중지
+            StopAllCoroutines();
             StartCoroutine(StartGauge());
         }
         else if (gaugeBar.gameObject.activeSelf)
         {
             IncreaseGauge();
+        }
+        else
+        {
+            // 낚시 진행 중인데 잘못 눌렀을 경우 → 실패 처리
+            TriggerFishingFail();
         }
     }
 
@@ -75,6 +83,8 @@ public class FishingManager : MonoBehaviour
             characterImage.sprite = normalSprite;
             isFishing = false;
             canReact = false;
+
+            TriggerFishingFail();
         }
     }
 
@@ -152,5 +162,26 @@ public class FishingManager : MonoBehaviour
         else
             return fishSprites[4];  //D급
 
+    }
+    void TriggerFishingFail()
+    {
+        StopAllCoroutines();  // 혹시 실행 중인 코루틴이 있다면 정지
+        isFishing = false;
+        canReact = false;
+
+        // 실패 이미지 보여주기
+        characterImage.sprite = failSprite;
+        failImage.SetActive(true);
+
+        // 몇 초 후 초기화
+        StartCoroutine(ResetAfterFail());
+    }
+
+    IEnumerator ResetAfterFail()
+    {
+        yield return new WaitForSeconds(2f);
+
+        failImage.SetActive(false);
+        characterImage.sprite = normalSprite;
     }
 }
