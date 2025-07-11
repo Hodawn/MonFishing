@@ -1,7 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+﻿using System.Collections;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class FishingManager : MonoBehaviour
 {
@@ -30,6 +31,20 @@ public class FishingManager : MonoBehaviour
     [Range(0f, 1f)] public float bRate = 0.3f;  // 30%
     [Range(0f, 1f)] public float cRate = 1f;
 
+    private bool isBusy = false; // 결과 보여주는 중인지 여부
+    public TMP_Text fishNameText;
+    private string[] fishNames = new string[]
+    {
+    "루비",    // Element 0
+    "두기몬",  // Element 1
+    "배스",         // Element 2
+    "쏘가리",        // Element 3
+    "EOAG 캔"
+
+    };
+
+
+
     void Start()
     {
         exclamationMark.SetActive(false);
@@ -44,6 +59,9 @@ public class FishingManager : MonoBehaviour
 
     public void OnFishButtonClick()
     {
+        // 결과 보여주는 중일 때는 무시!
+        if (isBusy) return;
+
         if (!isFishing)
         {
             StartCoroutine(StartFishing());
@@ -95,23 +113,30 @@ public class FishingManager : MonoBehaviour
         gauge = 0f;
         gaugeBar.value = 0f;
 
-        // 낚싯대를 든 캐릭터 이미지로 변경!
         characterImage.sprite = caughtSprite;
 
-        float timeLimit = 3f;
+        float timeLimit = 2.5f; // ⏳ 제한 시간 (초)
         float timer = 0f;
 
-        while (timer < timeLimit && gauge < 1f)
+        while (timer < timeLimit)
         {
             gaugeBar.value = gauge;
             timer += Time.deltaTime;
+
+            // 게이지가 다 찼으면 성공
+            if (gauge >= 1f)
+            {
+                gaugeBar.gameObject.SetActive(false);
+                ShowRandomFish();
+                yield break; // 함수 종료
+            }
+
             yield return null;
         }
 
+        // 제한 시간 종료 → 실패 처리
         gaugeBar.gameObject.SetActive(false);
-
-        // 결과물 보여주기 (캐릭터 이미지는 유지)
-        ShowRandomFish();
+        TriggerFishingFail();
     }
 
     void IncreaseGauge()
@@ -123,7 +148,10 @@ public class FishingManager : MonoBehaviour
 
     void ShowRandomFish()
     {
+        isBusy = true; // 결과 보여주는 중임!
+        int fishIndex = ChooseFishIndexByProbability();
         Sprite selectedFish = ChooseFishByProbability();
+        string selectedFishName = fishNames[fishIndex];
 
         // 두 이미지에 같은 물고기 스프라이트 넣기
         resultFishLargeImage.sprite = selectedFish;
@@ -132,6 +160,10 @@ public class FishingManager : MonoBehaviour
         // 이미지 보여주기
         resultFishLargeImage.gameObject.SetActive(true);
         resultFishSmallImage.gameObject.SetActive(true);
+
+        // 🐟 이름 표시
+        fishNameText.text = selectedFishName;
+        fishNameText.gameObject.SetActive(true);
 
         StartCoroutine(HideResultFish());
     }
@@ -142,25 +174,16 @@ public class FishingManager : MonoBehaviour
 
         resultFishLargeImage.gameObject.SetActive(false);
         resultFishSmallImage.gameObject.SetActive(false);
+        fishNameText.gameObject.SetActive(false);  // 👈 이름도 꺼주기
 
         characterImage.sprite = normalSprite;
         isFishing = false;
+        isBusy = false; // 결과 다 보여줬으니 버튼 다시 활성화!
     }
 
     Sprite ChooseFishByProbability()
     {
-        float r = Random.Range(0f, 1f);
-
-        if (r < sRate)
-            return fishSprites[0]; // S급
-        else if (r < sRate + aRate)
-            return fishSprites[1]; // A급
-        else if (r < sRate + aRate + bRate)
-            return fishSprites[2]; // B급
-        else if (r < sRate + bRate + cRate)
-            return fishSprites[3]; // C급
-        else
-            return fishSprites[4];  //D급
+        return fishSprites[ChooseFishIndexByProbability()];
 
     }
     void TriggerFishingFail()
@@ -183,5 +206,20 @@ public class FishingManager : MonoBehaviour
 
         failImage.SetActive(false);
         characterImage.sprite = normalSprite;
+    }
+
+    int ChooseFishIndexByProbability()
+    {
+        float rand = Random.value;
+        if (rand < sRate)
+            return 0; // S급
+        else if (rand < sRate + aRate)
+            return 1; // A급
+        else if (rand < sRate + aRate + bRate)
+            return 2; // B급
+        else if(rand < sRate + aRate + bRate + cRate)
+            return 3; // C급
+        else
+            return 4;
     }
 }
