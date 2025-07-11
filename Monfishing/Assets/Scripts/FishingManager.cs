@@ -149,8 +149,10 @@ public class FishingManager : MonoBehaviour
     void ShowRandomFish()
     {
         isBusy = true; // 결과 보여주는 중임!
+
         int fishIndex = ChooseFishIndexByProbability();
-        Sprite selectedFish = ChooseFishByProbability();
+
+        Sprite selectedFish = fishSprites[fishIndex];
         string selectedFishName = fishNames[fishIndex];
 
         // 두 이미지에 같은 물고기 스프라이트 넣기
@@ -183,7 +185,8 @@ public class FishingManager : MonoBehaviour
 
     Sprite ChooseFishByProbability()
     {
-        return fishSprites[ChooseFishIndexByProbability()];
+        int index = ChooseFishIndexByProbability();
+        return fishSprites[index];
 
     }
     void TriggerFishingFail()
