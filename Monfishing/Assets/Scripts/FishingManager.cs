@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using TMPro;
+#if UNITY_EDITOR
 using UnityEditor.Experimental.GraphView;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class FishingManager : MonoBehaviour
 {
@@ -43,6 +46,7 @@ public class FishingManager : MonoBehaviour
 
     };
 
+    //public CodexManager codexManager;
 
 
     void Start()
@@ -167,7 +171,11 @@ public class FishingManager : MonoBehaviour
         fishNameText.text = selectedFishName;
         fishNameText.gameObject.SetActive(true);
 
+        //codexManager.MarkFishAsCaught(fishIndex);
+
         StartCoroutine(HideResultFish());
+
+
     }
 
     IEnumerator HideResultFish()
